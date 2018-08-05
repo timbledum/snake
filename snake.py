@@ -28,6 +28,7 @@ LEFT = Point(-1, 0)
 
 START = Point(5, 5 + HEIGHT_SCORE)
 
+
 class App:
     def __init__(self):
         pyxel.init(WIDTH, HEIGHT, caption="Snake!", scale=8, fps=22)
@@ -88,15 +89,10 @@ class App:
 
     def check_death(self):
         head = self.snake[0]
-        if (
-            head.x < 0
-            or head.y <= HEIGHT_SCORE
-            or head.x >= WIDTH
-            or head.y >= HEIGHT
-        ):
-            self.death = True # Check out of bounds
+        if head.x < 0 or head.y <= HEIGHT_SCORE or head.x >= WIDTH or head.y >= HEIGHT:
+            self.death = True  # Check out of bounds
         elif len(self.snake) != len(set(self.snake)):
-            self.death = True # Check having run into self
+            self.death = True  # Check having run into self
 
     def draw(self):
         if not self.death:
@@ -117,9 +113,9 @@ class App:
             pyxel.pix(point.x, point.y, col=colour)
 
     def draw_score(self):
-            score = "{:04}".format(self.score)
-            pyxel.rect(0, 0, WIDTH, HEIGHT_SCORE, COL_SCORE_BACKGROUND)
-            pyxel.text(1, 1, score, COL_SCORE)
+        score = "{:04}".format(self.score)
+        pyxel.rect(0, 0, WIDTH, HEIGHT_SCORE, COL_SCORE_BACKGROUND)
+        pyxel.text(1, 1, score, COL_SCORE)
 
     def draw_death(self):
         pyxel.cls(col=COL_DEATH)
