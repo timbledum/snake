@@ -45,8 +45,8 @@ class App:
         if not self.death:
             self.update_direction()
             self.update_snake()
-            self.check_apple()
             self.check_death()
+            self.check_apple()
 
         if pyxel.btn(pyxel.KEY_Q):
             pyxel.quit()
@@ -86,7 +86,9 @@ class App:
             or head.x >= WIDTH
             or head.y >= HEIGHT
         ):
-            self.death = True
+            self.death = True # Check out of bounds
+        elif len(self.snake) != len(set(self.snake)):
+            self.death = True # Check having run into self
 
     def draw(self):
         if not self.death:
