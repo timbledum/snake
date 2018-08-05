@@ -183,15 +183,17 @@ class Snake:
         display_text.insert(1, "{:04}".format(self.score))
         for i, text in enumerate(display_text):
             y_offset = (FONT_HEIGHT + 2) * i
-            text_x = center_text(text, WIDTH)
+            text_x = self.center_text(text, WIDTH)
             pyxel.text(text_x, HEIGHT_DEATH + y_offset, text, COL_TEXT_DEATH)
 
+    @staticmethod
+    def center_text(text, page_width, char_width=pyxel.constants.FONT_WIDTH):
+        """Helper function for calcuating the start x value for centered text."""
 
-def center_text(text, page_width, char_width=pyxel.constants.FONT_WIDTH):
-    """Helper function for calcuating the start x value for centered text."""
+        text_width = len(text) * char_width
+        return (page_width - text_width) // 2
 
-    text_width = len(text) * char_width
-    return (page_width - text_width) // 2
+
 
 
 Snake()
