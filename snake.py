@@ -12,10 +12,10 @@ COL_APPLE = 8
 
 TEXT_DEATH = ["GAME OVER", "(Q)UIT", "(R)ESTART"]
 COL_TEXT_DEATH = 0
-HEIGHT_DEATH = 20
+HEIGHT_DEATH = 5
 
-WIDTH = 60
-HEIGHT = 80
+WIDTH = 40
+HEIGHT = 50
 
 HEIGHT_SCORE = FONT_HEIGHT = pyxel.constants.FONT_HEIGHT
 COL_SCORE = 6
@@ -30,7 +30,7 @@ START = Point(5, 5 + HEIGHT_SCORE)
 
 class App:
     def __init__(self):
-        pyxel.init(WIDTH, HEIGHT)
+        pyxel.init(WIDTH, HEIGHT, caption="Snake!", scale=8, fps=22)
         self.reset()
         pyxel.run(self.update, self.draw)
 
@@ -123,7 +123,9 @@ class App:
 
     def draw_death(self):
         pyxel.cls(col=COL_DEATH)
-        for i, text in enumerate(TEXT_DEATH):
+        display_text = TEXT_DEATH
+        display_text.insert(1, "{:04}".format(self.score))
+        for i, text in enumerate(display_text):
             y_offset = (FONT_HEIGHT + 2) * i
             text_x = center_text(text, WIDTH)
             pyxel.text(text_x, HEIGHT_DEATH + y_offset, text, COL_TEXT_DEATH)
