@@ -278,17 +278,21 @@ class Music:
         )
 
     def sfx_apple(self):
+        """Play apple collection sound."""
         pyxel.play(ch=0, snd=0)
 
     def sfx_death(self):
+        """Play death collection sound."""
         pyxel.play(ch=0, snd=1)
 
     def start_music(self):
+        """Start all music tracks (channels 1 - 3)."""
         music_tracks = [2, 3, 4]
         for ch, snd in enumerate(music_tracks):
             pyxel.play(ch=(ch + 1), snd=snd, loop=True)
 
     def stop_music(self):
+        """Stop all music tracks (channels 1 - 3)."""
         for ch in range(1,4):
             pyxel.stop(ch=ch)
 
