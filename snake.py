@@ -10,14 +10,14 @@ COL_HEAD = 7
 COL_DEATH = 8
 COL_APPLE = 8
 
-TEXT_DEATH = "GAME OVER"
+TEXT_DEATH = ["GAME OVER", "(Q)UIT", "(R)ESTART"]
 COL_TEXT_DEATH = 0
 HEIGHT_DEATH = 20
 
 WIDTH = 60
 HEIGHT = 80
 
-HEIGHT_SCORE = pyxel.constants.FONT_HEIGHT
+HEIGHT_SCORE = FONT_HEIGHT = pyxel.constants.FONT_HEIGHT
 COL_SCORE = 6
 COL_SCORE_BACKGROUND = 5
 
@@ -31,15 +31,16 @@ START = Point(5, 5 + HEIGHT_SCORE)
 class App:
     def __init__(self):
         pyxel.init(WIDTH, HEIGHT)
+        self.reset()
+        pyxel.run(self.update, self.draw)
 
+    def reset(self):
         self.direction = RIGHT
         self.snake = deque()
         self.snake.append(START)
         self.death = False
         self.score = 0
         self.generate_apple()
-
-        pyxel.run(self.update, self.draw)
 
     def update(self):
         if not self.death:
@@ -50,6 +51,9 @@ class App:
 
         if pyxel.btn(pyxel.KEY_Q):
             pyxel.quit()
+
+        if pyxel.btnp(pyxel.KEY_R, 0, 0):
+            self.reset()
 
     def update_direction(self):
         if pyxel.btn(pyxel.KEY_UP):
@@ -102,9 +106,7 @@ class App:
             pyxel.pix(self.apple.x, self.apple.y, col=COL_APPLE)
 
         else:
-            pyxel.cls(col=COL_DEATH)
-            text_x = center_text(TEXT_DEATH, WIDTH)
-            pyxel.text(text_x, HEIGHT_DEATH, TEXT_DEATH, COL_TEXT_DEATH)
+            self.draw_death()
 
     def draw_snake(self):
         for i, point in enumerate(self.snake):
@@ -118,6 +120,14 @@ class App:
             score = "{:04}".format(self.score)
             pyxel.rect(0, 0, WIDTH, HEIGHT_SCORE, COL_SCORE_BACKGROUND)
             pyxel.text(1, 1, score, COL_SCORE)
+
+    def draw_death(self):
+        pyxel.cls(col=COL_DEATH)
+        for i, text in enumerate(TEXT_DEATH):
+            y_offset = (FONT_HEIGHT + 2) * i
+            text_x = center_text(text, WIDTH)
+            pyxel.text(text_x, HEIGHT_DEATH + y_offset, text, COL_TEXT_DEATH)
+
 
 def center_text(text, page_width, char_width=pyxel.constants.FONT_WIDTH):
     text_width = len(text) * char_width
