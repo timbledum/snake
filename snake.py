@@ -53,13 +53,17 @@ class App:
 
     def update_direction(self):
         if pyxel.btn(pyxel.KEY_UP):
-            self.direction = UP
+            if self.direction is not DOWN:
+                self.direction = UP
         elif pyxel.btn(pyxel.KEY_DOWN):
-            self.direction = DOWN
+            if self.direction is not UP:
+                self.direction = DOWN
         elif pyxel.btn(pyxel.KEY_LEFT):
-            self.direction = LEFT
+            if self.direction is not RIGHT:
+                self.direction = LEFT
         elif pyxel.btn(pyxel.KEY_RIGHT):
-            self.direction = RIGHT
+            if self.direction is not LEFT:
+                self.direction = RIGHT
 
     def update_snake(self):
         old_head = self.snake[0]
