@@ -72,6 +72,7 @@ class Snake:
         self.death = False
         self.score = 0
         self.generate_apple()
+        self.music.start_music()
 
     ##############
     # Game logic #
@@ -140,11 +141,15 @@ class Snake:
 
         head = self.snake[0]
         if head.x < 0 or head.y <= HEIGHT_SCORE or head.x >= WIDTH or head.y >= HEIGHT:
-            self.music.sfx_death()
-            self.death = True  # Check out of bounds
+            self.death_event()
         elif len(self.snake) != len(set(self.snake)):
-            self.music.sfx_death()
-            self.death = True  # Check having run into self
+            self.death_event()
+
+    def death_event(self):
+        """Kill the game (bring up end screen)."""
+        self.music.sfx_death()
+        self.music.stop_music
+        self.death = True  # Check having run into self
 
     ##############
     # Draw logic #
@@ -282,6 +287,10 @@ class Music:
         music_tracks = [2, 3, 4]
         for ch, snd in enumerate(music_tracks):
             pyxel.play(ch=(ch + 1), snd=snd, loop=True)
+
+    def stop_music(self):
+        for ch in range(1,4):
+            pyxel.stop(ch=ch)
 
 
 if __name__ == "__main__":
