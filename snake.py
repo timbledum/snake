@@ -123,7 +123,7 @@ class App:
 
     def draw_death(self):
         pyxel.cls(col=COL_DEATH)
-        display_text = TEXT_DEATH
+        display_text = TEXT_DEATH[:]
         display_text.insert(1, "{:04}".format(self.score))
         for i, text in enumerate(display_text):
             y_offset = (FONT_HEIGHT + 2) * i
