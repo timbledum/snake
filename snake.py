@@ -29,6 +29,9 @@ class App:
         self.update_direction()
         self.update_snake()
 
+        if pyxel.btn(pyxel.KEY_Q):
+            pyxel.quit()
+
     def update_direction(self):
         if pyxel.btn(pyxel.KEY_UP):
             self.direction = UP
