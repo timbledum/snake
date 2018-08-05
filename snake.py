@@ -75,7 +75,7 @@ class App:
 
     def generate_apple(self):
         x = randint(0, WIDTH - 1)
-        y = randint(HEIGHT_SCORE, HEIGHT - 1)
+        y = randint(HEIGHT_SCORE + 1, HEIGHT - 1)
         self.apple = Point(x, y)
 
     def check_death(self):
