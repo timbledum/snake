@@ -59,6 +59,7 @@ class Snake:
         """Initiate pyxel, set up initial game variables, and run."""
 
         pyxel.init(WIDTH, HEIGHT, caption="Snake!", scale=8, fps=22)
+        self.music = Music()
         self.reset()
         pyxel.run(self.update, self.draw)
 
@@ -120,6 +121,7 @@ class Snake:
 
         if self.snake[0] == self.apple:
             self.score += 1
+            self.music.sfx_apple()
             self.snake.append(self.popped_point)
             self.generate_apple()
 
@@ -128,7 +130,7 @@ class Snake:
         snake_pixels = set(self.snake)
 
         self.apple = self.snake[0]
-        while self.apple in snake_pixels: 
+        while self.apple in snake_pixels:
             x = randint(0, WIDTH - 1)
             y = randint(HEIGHT_SCORE + 1, HEIGHT - 1)
             self.apple = Point(x, y)
@@ -138,8 +140,10 @@ class Snake:
 
         head = self.snake[0]
         if head.x < 0 or head.y <= HEIGHT_SCORE or head.x >= WIDTH or head.y >= HEIGHT:
+            self.music.sfx_death()
             self.death = True  # Check out of bounds
         elif len(self.snake) != len(set(self.snake)):
+            self.music.sfx_death()
             self.death = True  # Check having run into self
 
     ##############
@@ -194,6 +198,24 @@ class Snake:
         return (page_width - text_width) // 2
 
 
+class Music:
+    def __init__(self):
+        pyxel.sound(0).set(
+            note="c3e3g3c4c4", tone="s", volume="4", effect=("n" * 4 + "f"), speed=7
+        )
+        pyxel.sound(1).set(
+            "f3 b2 f2 b1  f1 f1 f1 f1",
+            tone="p",
+            volume=("4" * 4 + "4321"),
+            effect=("n" * 7 + "f"),
+            speed=9,
+        )
 
+    def sfx_apple(self):
+        pyxel.play(0, 0)
 
-Snake()
+    def sfx_death(self):
+        pyxel.play(0, 1)
+
+if __name__ == "__main__":
+    Snake()
