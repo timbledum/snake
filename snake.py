@@ -125,10 +125,13 @@ class Snake:
 
     def generate_apple(self):
         """Generate an apple randomly."""
+        snake_pixels = set(self.snake)
 
-        x = randint(0, WIDTH - 1)
-        y = randint(HEIGHT_SCORE + 1, HEIGHT - 1)
-        self.apple = Point(x, y)
+        self.apple = self.snake[0]
+        while self.apple in snake_pixels: 
+            x = randint(0, WIDTH - 1)
+            y = randint(HEIGHT_SCORE + 1, HEIGHT - 1)
+            self.apple = Point(x, y)
 
     def check_death(self):
         """Check whether the snake has died (out of bounds or doubled up.)"""
