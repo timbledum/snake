@@ -90,7 +90,7 @@ class App:
         head = self.snake[0]
         if (
             head.x < 0
-            or head.y < HEIGHT_SCORE
+            or head.y <= HEIGHT_SCORE
             or head.x >= WIDTH
             or head.y >= HEIGHT
         ):
