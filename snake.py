@@ -8,6 +8,7 @@ COL_BACKGROUND = 3
 COL_BODY = 11
 COL_HEAD = 7
 COL_DEATH = 8
+COL_APPLE = 8
 
 TEXT_DEATH = "GAME OVER"
 COL_TEXT_DEATH = 0
@@ -70,7 +71,7 @@ class App:
         if self.snake[0] == self.apple:
             self.score += 1
             self.snake.append(self.popped_point)
-            generate_apple()
+            self.generate_apple()
 
     def generate_apple(self):
         x = randint(0, WIDTH - 1)
@@ -92,6 +93,7 @@ class App:
             pyxel.cls(col=COL_BACKGROUND)
             self.draw_snake()
             self.draw_score()
+            pyxel.pix(self.apple.x, self.apple.y, col=COL_APPLE)
 
         else:
             pyxel.cls(col=COL_DEATH)
