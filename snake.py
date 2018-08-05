@@ -148,7 +148,7 @@ class Snake:
     def death_event(self):
         """Kill the game (bring up end screen)."""
         self.music.sfx_death()
-        self.music.stop_music
+        self.music.stop_music()
         self.death = True  # Check having run into self
 
     ##############
