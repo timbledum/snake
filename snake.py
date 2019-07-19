@@ -23,8 +23,6 @@ Point = namedtuple("Point", ["x", "y"])  # Convenience class for coordinates
 # Constants #
 #############
 
-FONT_HEIGHT, FONT_WIDTH = 6, 4
-
 COL_BACKGROUND = 3
 COL_BODY = 11
 COL_HEAD = 7
@@ -38,7 +36,7 @@ HEIGHT_DEATH = 5
 WIDTH = 40
 HEIGHT = 50
 
-HEIGHT_SCORE = FONT_HEIGHT
+HEIGHT_SCORE = pyxel.FONT_HEIGHT
 COL_SCORE = 6
 COL_SCORE_BACKGROUND = 5
 
@@ -60,7 +58,7 @@ class Snake:
     def __init__(self):
         """Initiate pyxel, set up initial game variables, and run."""
 
-        pyxel.init(WIDTH, HEIGHT)
+        pyxel.init(WIDTH, HEIGHT, caption="Snake!", scale=8, fps=20)
         self.music = Music()
         self.reset()
         pyxel.run(self.update, self.draw)
@@ -193,12 +191,12 @@ class Snake:
         display_text = TEXT_DEATH[:]
         display_text.insert(1, "{:04}".format(self.score))
         for i, text in enumerate(display_text):
-            y_offset = (FONT_HEIGHT + 2) * i
+            y_offset = (pyxel.FONT_HEIGHT + 2) * i
             text_x = self.center_text(text, WIDTH)
             pyxel.text(text_x, HEIGHT_DEATH + y_offset, text, COL_TEXT_DEATH)
 
     @staticmethod
-    def center_text(text, page_width, char_width=FONT_WIDTH):
+    def center_text(text, page_width, char_width=pyxel.FONT_WIDTH):
         """Helper function for calcuating the start x value for centered text."""
 
         text_width = len(text) * char_width
