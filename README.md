@@ -4,6 +4,8 @@
 Try and collect the tasty apples without running
 into the side or yourself.
 
+Requires pyxel version >= 1.1.6.
+
 Controls are the arrow keys **←** **↑** **→** **↓**
 
 **Q**: Quit the game
