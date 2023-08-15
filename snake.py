@@ -58,7 +58,7 @@ class Snake:
     def __init__(self):
         """Initiate pyxel, set up initial game variables, and run."""
 
-        pyxel.init(WIDTH, HEIGHT, caption="Snake!", scale=8, fps=20)
+        pyxel.init(WIDTH, HEIGHT, title="Snake!", display_scale=8, fps=20)
         self.music = Music()
         self.reset()
         pyxel.run(self.update, self.draw)
@@ -162,7 +162,7 @@ class Snake:
             pyxel.cls(col=COL_BACKGROUND)
             self.draw_snake()
             self.draw_score()
-            pyxel.pix(self.apple.x, self.apple.y, col=COL_APPLE)
+            pyxel.pset(self.apple.x, self.apple.y, col=COL_APPLE)
 
         else:
             self.draw_death()
@@ -175,7 +175,7 @@ class Snake:
                 colour = COL_HEAD
             else:
                 colour = COL_BODY
-            pyxel.pix(point.x, point.y, col=colour)
+            pyxel.pset(point.x, point.y, col=colour)
 
     def draw_score(self):
         """Draw the score at the top."""
@@ -204,7 +204,7 @@ class Snake:
 
 
 ###########################
-# Music and sound effects #
+# Music and sound effectss #
 ###########################
 
 
@@ -212,15 +212,15 @@ class Music:
     def __init__(self):
         """Define sound and music."""
 
-        # Sound effects
+        # Sound effectss
         pyxel.sound(0).set(
-            note="c3e3g3c4c4", tone="s", volume="4", effect=("n" * 4 + "f"), speed=7
+            notes="c3e3g3c4c4", tones="s", volumes="4", effects=("n" * 4 + "f"), speed=7
         )
         pyxel.sound(1).set(
-            note="f3 b2 f2 b1  f1 f1 f1 f1",
-            tone="p",
-            volume=("4" * 4 + "4321"),
-            effect=("n" * 7 + "f"),
+            notes="f3 b2 f2 b1  f1 f1 f1 f1",
+            tones="p",
+            volumes=("4" * 4 + "4321"),
+            effects=("n" * 7 + "f"),
             speed=9,
         )
 
@@ -248,10 +248,10 @@ class Music:
 
         # Music
         pyxel.sound(2).set(
-            note=melody1 * 2 + melody2 * 2,
-            tone="s",
-            volume=("3"),
-            effect=("nnnsffff"),
+            notes=melody1 * 2 + melody2 * 2,
+            tones="s",
+            volumes=("3"),
+            effects=("nnnsffff"),
             speed=20,
         )
 
@@ -267,13 +267,13 @@ class Music:
         )
 
         pyxel.sound(3).set(
-            note=harmony1 * 2 + harmony2 * 2, tone="t", volume="5", effect="f", speed=20
+            notes=harmony1 * 2 + harmony2 * 2, tones="t", volumes="5", effects="f", speed=20
         )
         pyxel.sound(4).set(
-            note=("f0 r a4 r  f0 f0 a4 r" "f0 r a4 r   f0 f0 a4 f0"),
-            tone="n",
-            volume="6622 6622 6622 6426",
-            effect="f",
+            notes=("f0 r a4 r  f0 f0 a4 r" "f0 r a4 r   f0 f0 a4 f0"),
+            tones="n",
+            volumes="6622 6622 6622 6426",
+            effects="f",
             speed=20,
         )
 
